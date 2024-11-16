@@ -264,14 +264,20 @@
     }
   });
 
-  $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-    disableOn: 700,
-    type: 'iframe',
-    mainClass: 'mfp-fade',
-    removalDelay: 160,
-    preloader: false,
-
-    fixedContentPos: false
+  $('.popup-vimeo').magnificPopup({
+	type: 'iframe',
+	iframe: {
+	  patterns: {
+		vimeo: {
+		  index: 'vimeo.com/',
+		  id: function(url) {
+			var m = url.match(/(?:vimeo\.com\/)([0-9]+)/);
+			return m ? m[1] : null;
+		  },
+		  src: 'https://player.vimeo.com/video/%id%?autoplay=1'
+		}
+	  }
+	}
   });
 
 
